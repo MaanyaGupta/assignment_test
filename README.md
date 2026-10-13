@@ -32,11 +32,25 @@ To execute the automated evaluation over `eval.json` and generate the score tabl
 python run_eval.py
 ```
 
-### Running Interactive / Smoke Tests
+### Running the Interactive Terminal Shell
+To ask questions interactively from the command line:
+```bash
+python cli.py
+```
+
+### Running the Local Web UI
+To launch the browser interface with interactive date toggling and preset question chips:
+```bash
+python app.py
+```
+Open **`http://localhost:8000`** in any browser.
+
+### Running Quick Smoke Tests
 To run the built-in smoke tests on the core benchmark questions:
 ```bash
 python assistant.py
 ```
+
 
 ### Programmatic Usage
 ```python
@@ -125,8 +139,11 @@ Adversarial Handled   : 9/9 (100.0%)
 
 ## 6. Project Manifest
 - [assistant.py](file:///c:/Users/91981/Downloads/ai-2-data-20261013T102645Z-1-001/ai-2-data/assistant.py): Core question-answering assistant implementation.
+- [cli.py](file:///c:/Users/91981/Downloads/ai-2-data-20261013T102645Z-1-001/ai-2-data/cli.py): Interactive command-line shell with date switcher and benchmark picker.
+- [app.py](file:///c:/Users/91981/Downloads/ai-2-data-20261013T102645Z-1-001/ai-2-data/app.py): Local zero-dependency web interface server.
 - [eval.json](file:///c:/Users/91981/Downloads/ai-2-data-20261013T102645Z-1-001/ai-2-data/eval.json): 15 comprehensive evaluation test cases.
 - [run_eval.py](file:///c:/Users/91981/Downloads/ai-2-data-20261013T102645Z-1-001/ai-2-data/run_eval.py): Script running evaluation and printing score table.
 - [DECISIONS.md](file:///c:/Users/91981/Downloads/ai-2-data-20261013T102645Z-1-001/ai-2-data/DECISIONS.md): In-depth record of ambiguities, legal precedence, and design decisions.
 - [WHERE_IT_BREAKS.md](file:///c:/Users/91981/Downloads/ai-2-data-20261013T102645Z-1-001/ai-2-data/WHERE_IT_BREAKS.md): Three questions that break the system with technical explanations.
 - [AI_USAGE.md](file:///c:/Users/91981/Downloads/ai-2-data-20261013T102645Z-1-001/ai-2-data/AI_USAGE.md): Transparent disclosure of AI collaboration.
+
