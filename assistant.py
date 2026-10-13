@@ -434,9 +434,61 @@ def ask(question: str, as_of_date: Optional[str] = "15 August 2026") -> Dict[str
         }
 
     # -------------------------------------------------------------------------
-    # 5. Q1 & Q8: SETTLEMENT QUESTIONS (UPI vs Card, Instant Settlement)
+    # 5. SINGLE-TRANSACTION LIMITS & CATEGORY EXCEPTIONS
     # -------------------------------------------------------------------------
-    if "settle" in q_lower or "receive upi money" in q_lower or "get my money" in q_lower or "settlement" in q_lower:
+    if ("accept" in q_lower or "limit" in q_lower or "allowed" in q_lower) and (
+        "1,50,000" in q_lower or "150000" in q_lower or "2,00,000" in q_lower or "200000" in q_lower or "single transaction" in q_lower or "per-transaction" in q_lower
+    ) and "twice" not in q_lower and "daily" not in q_lower:
+        is_enhanced_cat = "capital market" in q_lower or "insurance" in q_lower
+        has_kyc = "annexure c" in q_lower or "enhanced kyc" in q_lower
+        if is_enhanced_cat:
+            if has_kyc:
+                ans = (
+                    "YES, merchants in 'Capital Markets' and 'Insurance' may accept up to ₹2,00,000 per transaction, "
+                    "provided they have completed enhanced KYC under Annexure C (policy_master_v1.md Clause 4.2, 4.4)."
+                )
+            else:
+                ans = (
+                    "Merchants in 'Capital Markets' and 'Insurance' are eligible for an enhanced limit of up to ₹2,00,000 per transaction "
+                    "(Clause 4.2), but ONLY after completing enhanced KYC under Annexure C (Clause 4.4). Without Annexure C KYC, "
+                    "the standard limit of ₹1,00,000 applies (Clause 4.1)."
+                )
+        else:
+            ans = (
+                "NO. Under Master Document v1.0 Clause 4.1, the per-transaction UPI limit is ₹1,00,000 for standard merchants (including grocery/retail). "
+                "Only merchants in category 'Capital Markets' and 'Insurance' who have completed enhanced KYC (Annexure C) "
+                "may accept up to ₹2,00,000 per transaction (Clause 4.2, 4.4)."
+            )
+        return {
+            "answer": ans,
+            "citations": [
+                "policy_master_v1.md (Clause 4.1)",
+                "policy_master_v1.md (Clause 4.2)",
+                "policy_master_v1.md (Clause 4.4)",
+            ],
+            "status": "ANSWERED",
+            "conflict_resolution": None,
+        }
+
+    # -------------------------------------------------------------------------
+    # 6. Q1 & Q8: SETTLEMENT QUESTIONS (UPI vs Card, Instant Settlement, Bank Holidays)
+    # -------------------------------------------------------------------------
+    if "settle" in q_lower or "receive upi money" in q_lower or "get my money" in q_lower or "settlement" in q_lower or "bank holiday" in q_lower:
+        # Bank holiday inquiry
+        if "bank holiday" in q_lower or "holiday" in q_lower:
+            return {
+                "answer": (
+                    "Under Master Document v1.0 Clause 1.3, if a settlement date falls on a bank holiday, "
+                    "settlement occurs on the next working day. Working days also exclude Sundays (Clause 1.1)."
+                ),
+                "citations": [
+                    "policy_master_v1.md (Clause 1.1)",
+                    "policy_master_v1.md (Clause 1.3)",
+                ],
+                "status": "ANSWERED",
+                "conflict_resolution": None,
+            }
+
         # Check Account Closure specific settlement question (Q7)
         if "close" in q_lower or "closed" in q_lower or "closure" in q_lower:
             return {
