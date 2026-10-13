@@ -1,0 +1,289 @@
+[
+  {
+    "id": "Q1",
+    "question": "When does a small merchant receive UPI money?",
+    "as_of_date": "15 August 2026",
+    "is_adversarial": false,
+    "adversarial_type": null,
+    "expected_status": "CONFLICT_RESOLVED",
+    "expected_citations": [
+      "circular_2026_08_amendment.md (Clause A)",
+      "policy_master_v1.md (Clause 1.1)"
+    ],
+    "expected_answer_keywords": [
+      "T+0",
+      "Instant Settlement",
+      "T+1",
+      "Clause A"
+    ],
+    "expected_answer": "As of 15 August 2026, UPI settlement is T+0 (same day by 11:59 PM) for merchants with the 'Instant Settlement' add-on, and T+1 for all others pursuant to Circular MS/2026/17 Clause A which replaced Policy Master Clause 1.1."
+  },
+  {
+    "id": "Q2",
+    "question": "A large merchant (above Rs.10 lakh monthly) receives a Rs.4,000 UPI payment. What MDR and GST do they pay?",
+    "as_of_date": "15 August 2026",
+    "is_adversarial": false,
+    "adversarial_type": null,
+    "expected_status": "CONFLICT_RESOLVED",
+    "expected_citations": [
+      "policy_master_v1.md (Clause 2.2)",
+      "circular_2026_08_amendment.md (Clause C)",
+      "policy_master_v1.md (Clause 2.4)"
+    ],
+    "expected_answer_keywords": [
+      "20.00",
+      "3.60",
+      "23.60",
+      "0.50%"
+    ],
+    "expected_answer": "MDR is 0.50% of Rs. 4,000 = Rs. 20.00 (under the Rs. 25 cap in Circular Clause C). GST at 18% is Rs. 3.60. Total fee payable is Rs. 23.60."
+  },
+  {
+    "id": "Q3",
+    "question": "Same merchant, a Rs.1,50,000 payment. What do they pay?",
+    "as_of_date": "15 August 2026",
+    "is_adversarial": true,
+    "adversarial_type": "false_premise_and_limit_trap",
+    "expected_status": "CONFLICT_RESOLVED",
+    "expected_citations": [
+      "policy_master_v1.md (Clause 2.2)",
+      "circular_2026_08_amendment.md (Clause C)",
+      "policy_master_v1.md (Clause 2.4)",
+      "policy_master_v1.md (Clause 4.1)",
+      "policy_master_v1.md (Clause 4.2)",
+      "policy_master_v1.md (Clause 4.4)"
+    ],
+    "expected_answer_keywords": [
+      "25.00",
+      "4.50",
+      "29.50",
+      "1,00,000",
+      "Capital Markets"
+    ],
+    "expected_answer": "Under Clause 4.1, UPI per-transaction limit is Rs. 1,00,000, so standard merchants cannot accept Rs. 1,50,000 unless in Capital Markets/Insurance with Annexure C KYC. If eligible, MDR is 0.50% (Rs. 750) capped at Rs. 25.00 (Circular Clause C), plus 18% GST (Rs. 4.50), totalling Rs. 29.50."
+  },
+  {
+    "id": "Q4a",
+    "question": "A merchant refunds a customer 3 hours after the sale. Do they get the MDR back?",
+    "as_of_date": "20 Aug 2026",
+    "is_adversarial": false,
+    "adversarial_type": null,
+    "expected_status": "ANSWERED",
+    "expected_citations": [
+      "policy_master_v1.md (Clause 3.2)",
+      "policy_master_v1.md (Clause 3.3)"
+    ],
+    "expected_answer_keywords": [
+      "YES",
+      "reversed in full",
+      "24 hours"
+    ],
+    "expected_answer": "As of 20 August 2026, YES. Under Master Policy Clause 3.3, refunds initiated within 24 hours have MDR reversed in full (Circular Clause D deletion does not take effect until 01 September 2026)."
+  },
+  {
+    "id": "Q4b",
+    "question": "A merchant refunds a customer 3 hours after the sale. Do they get the MDR back?",
+    "as_of_date": "5 Sep 2026",
+    "is_adversarial": true,
+    "adversarial_type": "deleted_clause",
+    "expected_status": "CONFLICT_RESOLVED",
+    "expected_citations": [
+      "circular_2026_08_amendment.md (Clause D)",
+      "policy_master_v1.md (Clause 3.2)"
+    ],
+    "expected_answer_keywords": [
+      "NO",
+      "deleted",
+      "Clause 3.2",
+      "without exception"
+    ],
+    "expected_answer": "As of 5 September 2026, NO. Circular MS/2026/17 Clause D deleted Clause 3.3 effective 01 September 2026; Clause 3.2 now applies without exception."
+  },
+  {
+    "id": "Q5",
+    "question": "What does the FAQ say about the MDR cap, and is the FAQ right?",
+    "as_of_date": "15 August 2026",
+    "is_adversarial": true,
+    "adversarial_type": "stale_faq",
+    "expected_status": "CONFLICT_RESOLVED",
+    "expected_citations": [
+      "merchant_faq_2026-03.md",
+      "policy_master_v1.md (Clause 2.3)",
+      "circular_2026_08_amendment.md (Clause C)"
+    ],
+    "expected_answer_keywords": [
+      "no upper limit",
+      "incorrect",
+      "15",
+      "25"
+    ],
+    "expected_answer": "The FAQ says 'There is no upper limit on the fee'. The FAQ is INCORRECT; Master Policy Clause 2.3 set a Rs. 15 cap, amended by Circular Clause C to Rs. 15 for small and Rs. 25 for large merchants."
+  },
+  {
+    "id": "Q6",
+    "question": "Can a customer pay Rs.1,00,000 twice in one day to a merchant?",
+    "as_of_date": "15 August 2026",
+    "is_adversarial": false,
+    "adversarial_type": null,
+    "expected_status": "CONFLICT_RESOLVED",
+    "expected_citations": [
+      "policy_master_v1.md (Clause 4.1)",
+      "policy_master_v1.md (Clause 4.3)",
+      "circular_2026_08_amendment.md (Clause E)"
+    ],
+    "expected_answer_keywords": [
+      "NO",
+      "daily limit",
+      "1,00,000",
+      "Clause E"
+    ],
+    "expected_answer": "NO. Under Master Policy Clause 4.3 and Circular Clause E, the daily limit per customer account across all UPI transactions is Rs. 1,00,000 (or bank limit if lower). Two payments total Rs. 2,00,000 and exceed the daily limit."
+  },
+  {
+    "id": "Q7",
+    "question": "I closed my account yesterday. When will I get my money?",
+    "as_of_date": "15 August 2026",
+    "is_adversarial": false,
+    "adversarial_type": null,
+    "expected_status": "ANSWERED",
+    "expected_citations": [
+      "policy_master_v1.md (Clause 5.1)",
+      "policy_master_v1.md (Clause 5.2)",
+      "merchant_faq_2026-03.md"
+    ],
+    "expected_answer_keywords": [
+      "10 working days",
+      "30 days",
+      "outstanding dues"
+    ],
+    "expected_answer": "Under Master Policy Clause 5.2, pending settlements are released within 10 working days of closure after deducting outstanding dues, subject to 30 days notice under Clause 5.1."
+  },
+  {
+    "id": "Q8",
+    "question": "Does the policy allow me to settle card payments same day?",
+    "as_of_date": "15 August 2026",
+    "is_adversarial": false,
+    "adversarial_type": null,
+    "expected_status": "ANSWERED",
+    "expected_citations": [
+      "policy_master_v1.md (Clause 1.2)",
+      "circular_2026_08_amendment.md (Clause A)",
+      "circular_2026_08_amendment.md (Clause F)"
+    ],
+    "expected_answer_keywords": [
+      "NO",
+      "T+2",
+      "UPI"
+    ],
+    "expected_answer": "NO. Card transactions settle T+2 (two working days) per Clause 1.2. Same-day settlement (T+0) under Circular Clause A applies strictly to UPI transactions."
+  },
+  {
+    "id": "Q9",
+    "question": "Does a large merchant have an unlimited MDR fee cap as per the merchant FAQ?",
+    "as_of_date": "15 August 2026",
+    "is_adversarial": true,
+    "adversarial_type": "stale_faq",
+    "expected_status": "CONFLICT_RESOLVED",
+    "expected_citations": [
+      "merchant_faq_2026-03.md",
+      "policy_master_v1.md (Clause 2.3)",
+      "circular_2026_08_amendment.md (Clause C)"
+    ],
+    "expected_answer_keywords": [
+      "NO",
+      "incorrect",
+      "25",
+      "Clause C"
+    ],
+    "expected_answer": "No. The FAQ claim of no upper limit is wrong and superseded by Circular Clause C which caps large merchant UPI MDR at Rs. 25."
+  },
+  {
+    "id": "Q10",
+    "question": "If I refund a customer on 10 September 2026 after 1 hour, do I get the MDR reversed because it's under 24 hours?",
+    "as_of_date": "10 September 2026",
+    "is_adversarial": true,
+    "adversarial_type": "deleted_clause",
+    "expected_status": "CONFLICT_RESOLVED",
+    "expected_citations": [
+      "circular_2026_08_amendment.md (Clause D)",
+      "policy_master_v1.md (Clause 3.2)"
+    ],
+    "expected_answer_keywords": [
+      "NO",
+      "deleted",
+      "Clause D",
+      "without exception"
+    ],
+    "expected_answer": "NO. As of 10 September 2026, Clause 3.3 was deleted by Circular Clause D effective 01 September 2026. Clause 3.2 applies without exception, so MDR is not refunded."
+  },
+  {
+    "id": "Q11",
+    "question": "What is the MDR fee for RuPay credit cards processed over UPI?",
+    "as_of_date": "15 August 2026",
+    "is_adversarial": true,
+    "adversarial_type": "missing_information",
+    "expected_status": "CANNOT_ANSWER",
+    "expected_citations": [],
+    "expected_answer_keywords": [
+      "cannot be answered",
+      "RuPay",
+      "do not contain"
+    ],
+    "expected_answer": "CANNOT_ANSWER. The policy documents do not contain any terms or fee schedules for RuPay credit cards on UPI."
+  },
+  {
+    "id": "Q12",
+    "question": "Can a merchant refund a customer after 110 days since the chargeback window is 120 days?",
+    "as_of_date": "15 August 2026",
+    "is_adversarial": true,
+    "adversarial_type": "false_premise",
+    "expected_status": "ANSWERED",
+    "expected_citations": [
+      "policy_master_v1.md (Clause 3.1)",
+      "policy_master_v1.md (Clause 3.4)"
+    ],
+    "expected_answer_keywords": [
+      "90 days",
+      "120",
+      "chargeback"
+    ],
+    "expected_answer": "No. Under Master Policy Clause 3.1, merchant refunds must be initiated within 90 days. The 120-day timeframe in Clause 3.4 is strictly for bank chargebacks."
+  },
+  {
+    "id": "Q13",
+    "question": "How much does the Instant Settlement add-on cost per month?",
+    "as_of_date": "15 August 2026",
+    "is_adversarial": true,
+    "adversarial_type": "missing_information",
+    "expected_status": "CANNOT_ANSWER",
+    "expected_citations": [
+      "circular_2026_08_amendment.md (Clause A)"
+    ],
+    "expected_answer_keywords": [
+      "does not specify",
+      "add-on",
+      "cost"
+    ],
+    "expected_answer": "CANNOT_ANSWER. While Circular Clause A mentions the 'Instant Settlement' add-on, neither document specifies its pricing or subscription fee."
+  },
+  {
+    "id": "Q14",
+    "question": "Can a grocery merchant accept a single UPI payment of Rs. 1,50,000?",
+    "as_of_date": "15 August 2026",
+    "is_adversarial": true,
+    "adversarial_type": "false_premise",
+    "expected_status": "ANSWERED",
+    "expected_citations": [
+      "policy_master_v1.md (Clause 4.1)",
+      "policy_master_v1.md (Clause 4.2)",
+      "policy_master_v1.md (Clause 4.4)"
+    ],
+    "expected_answer_keywords": [
+      "NO",
+      "1,00,000",
+      "Capital Markets",
+      "Annexure C"
+    ],
+    "expected_answer": "NO. Standard merchants have a per-transaction limit of Rs. 1,00,000 (Clause 4.1). Only Capital Markets and Insurance merchants with Annexure C KYC may accept up to Rs. 2,00,000 (Clause 4.2, 4.4)."
+  }
+]
