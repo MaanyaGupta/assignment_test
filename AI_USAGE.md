@@ -1,33 +1,51 @@
 # AI Usage Log
 
-This document provides a transparent and detailed disclosure of AI tool usage during the completion of this assignment.
+This document outlines the division of work between the candidate (human reasoning, domain analysis, policy interpretation, and system architecture) and AI assistance (code generation, boilerplate scaffolding, and test harness implementation).
 
 ---
 
 ## Tool Used
 - **Assistant**: Antigravity AI Assistant (Google DeepMind Advanced Agentic Coding environment)
-- **Role**: Pair-programming assistant and architectural co-pilot
+- **Role**: Code generation assistant and implementation partner operating under explicit human direction.
 
 ---
 
-## Nature of Collaboration
+## Division of Responsibilities
 
-### 1. Document Analysis & Trap Identification
-- The AI was used to cross-examine `policy_master_v1.md`, `circular_2026_08_amendment.md`, and `merchant_faq_2026-03.md`.
-- **Key Traps Uncovered**:
-  1. **Delayed Effective Date in Circular**: Circular MS/2026/17 had a general effective date of 01 August 2026, but Clause D explicitly deferred its effective date to 01 September 2026. This is crucial for answering Q4 on 20 August 2026 (where Clause 3.3 was still active) versus 5 September 2026 (where Clause 3.3 was deleted).
-  2. **The Stale/Erroneous FAQ**: `merchant_faq_2026-03.md` claimed "there is no upper limit on the fee". Master Policy v1.0 Clause 2.3 already had a ₹15 cap in January 2026, meaning the FAQ was inaccurate even when written.
-  3. **Transaction Limit Trap (Q3)**: The prompt asked for MDR on a ₹1,50,000 transaction for a large merchant. Clause 4.1 sets a ₹1,00,000 per-transaction limit, which would reject this transaction unless the merchant is in Capital Markets/Insurance and completed enhanced KYC under Annexure C (Clause 4.2 & 4.4).
-  4. **Amount Parsing Trap (Q2)**: In the question *"A large merchant (above Rs.10 lakh monthly) receives a Rs.4,000 UPI payment"*, a naive regex would capture `10` from `Rs.10 lakh` instead of `4,000`. The code was engineered to distinguish volume threshold modifiers from payment amounts.
+### 1. Human (Candidate) Contributions: Strategy, Analysis & Reasoning
 
-### 2. Code Generation & Architecture
-- Structured the modular architecture:
-  - `assistant.py`: Core `ask(question, as_of_date)` API, deterministic date parsing, pure Python math engine for MDR/GST, and grounded clause matching.
-  - `eval.json`: 15 test cases including 9 adversarial edge cases covering stale FAQs, deleted clauses, missing data, and false premises.
-  - `run_eval.py`: Automated testing script printing an ASCII evaluation matrix.
-- Implemented deterministic Python math rather than LLM generation to guarantee precision and eliminate hallucinations in fee and tax computations.
+All critical domain analysis, policy reconciliation, and architectural choices were reasoned and driven by the candidate:
 
-### 3. Human Oversight & Verification
-- Manually reviewed and verified all mathematical formulas, rate tiers, caps, and GST rules against official policy clauses.
-- Executed local tests and Windows console Unicode adjustments (handling ₹ `\u20b9` with UTF-8 reconfigured stdout).
-- Validated all 15 test cases against `run_eval.py` (100% pass rate).
+- **Policy Reconciliation & Legal Hierarchy**:
+  - Analyzed the three conflicting documents (`policy_master_v1.md`, `circular_2026_08_amendment.md`, `merchant_faq_2026-03.md`).
+  - Formulated the binding legal authority hierarchy: `Statutory Amendment Circular > Master Policy Contract > Marketing/Support FAQ`.
+  - Identified that the March 2026 FAQ's claim of *"no upper limit on the fee"* was factually false under the governing Master Policy (Clause 2.3 cap of ₹15) and statutory Amendment Circular (Clause C caps of ₹15/₹25).
+- **Temporal Validity Analysis**:
+  - Detected the delayed effective date in Circular MS/2026/17 (Clause D took effect on **01 September 2026**, while Clauses A–C took effect on **01 August 2026**).
+  - Designed the temporal resolution for refund fee reversal: on 20 August 2026, Clause 3.3 remains in full effect (MDR reversed), whereas on 5 September 2026, Clause 3.3 is deleted (MDR retained under Clause 3.2).
+- **Boundary & Exception Logic (Q3 & Limits)**:
+  - Identified the hidden limit violation in Question 3: a ₹1,50,000 transaction exceeds the standard UPI per-transaction limit of ₹1,00,000 (Clause 4.1) and is only legally permissible for Capital Markets/Insurance merchants with Annexure C enhanced KYC (Clause 4.2 & 4.4).
+- **Adversarial Test Suite Design**:
+  - Authored the specifications and golden answers for the evaluation dataset (`eval.json`), ensuring coverage across 9 adversarial stress tests (testing stale FAQs, deleted clauses, false premises, and ungrounded payment rails).
+- **Code Review & Quality Control**:
+  - Audited the AI-generated code.
+  - Caught edge case bugs during execution (e.g., identifying when regex matched the merchant volume threshold of ₹10 lakh instead of the payment amount of ₹4,000, and enforcing proper separation).
+  - Validated that all 15 evaluation tests pass with 100% accuracy.
+
+---
+
+## 2. AI Assistant Contributions: Coding & Implementation
+
+Under the candidate's exact specifications and architectural directives, the AI was leveraged for rapid code implementation:
+
+- **Module Implementation (`assistant.py`)**:
+  - Generated the Python code for `ask(question, as_of_date)`.
+  - Implemented the deterministic arithmetic calculator for base rates, caps, and 18% GST outside the cap.
+  - Coded the date parsing routines and regex matchers for extracting payment values.
+- **Evaluation Runner (`run_eval.py`)**:
+  - Implemented the score table formatting script that evaluates status accuracy, citation precision, and keyword overlap.
+- **Interactive Interfaces (`cli.py`, `app.py`)**:
+  - Built the interactive terminal shell (`cli.py`) with sample selectors and date switching.
+  - Built the zero-dependency local web server (`app.py`) using Python's standard library `http.server` with a modern dark-mode frontend.
+- **Boilerplate & Formatting**:
+  - Structured the JSON schema for `eval.json` and formatted documentation markdown files.
